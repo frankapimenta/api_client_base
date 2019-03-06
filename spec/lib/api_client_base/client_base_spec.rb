@@ -8,7 +8,9 @@ module ApiClientBase
       end
     end
     context "sets environment on initialization" do
-      specify { expect { described_class.new env: :staging}.not_to raise_error }
+      subject { described_class.new(env: :staging) }
+      specify { expect { subject }.not_to raise_error }
+      specify { expect(subject.env).to eq :staging }
     end
   end
 end

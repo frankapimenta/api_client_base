@@ -1,11 +1,12 @@
 module ApiClientBase
   class ClientBase
 
-    def initialize env: :default
+    def initialize env: :development
+      @env = env
     end
 
     def env
-      :development
+      @env
     end
   end
 end
