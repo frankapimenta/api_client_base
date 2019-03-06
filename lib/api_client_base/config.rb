@@ -46,7 +46,7 @@ module ApiClientBase
       configurations.each_pair do |k,v|
         instance_eval <<-METHODS
           def #{k}
-            #{v}
+            @#{k} = #{v}
           end
         METHODS
       end

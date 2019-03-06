@@ -44,6 +44,10 @@ module ApiClientBase
         expect_any_instance_of(described_class).to receive(:load_configurations)
         subject
       end
+      specify "defines @ssl" do
+        subject.ssl
+        expect(subject.instance_variables).to include(:@ssl)
+      end
       specify { expect(subject.ssl).to be_falsey }
     end
   end
