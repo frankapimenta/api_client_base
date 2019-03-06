@@ -16,5 +16,10 @@ module ApiClientBase
 
     # @return [String] the configuration file name
     attr_reader :file_name
+
+    # @return [Path] the path to the config folder of this gem
+    def config_path
+      Pathname.new File.expand_path('/config')
+    end
   end
 end

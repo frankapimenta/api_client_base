@@ -21,5 +21,10 @@ module ApiClientBase
     specify "defines configuration file name on initialization" do
       expect(described_class.new(file_name: 'config.yml').file_name).to eq 'config.yml'
     end
+    context "#config_path" do
+      specify { expect(subject).to respond_to(:config_path).with(0).arguments }
+      specify { expect(subject.config_path).to be_instance_of(Pathname) }
+      specify { expect(subject.config_path.realdirpath.to_s).to eq "/config" }
+    end
   end
 end
