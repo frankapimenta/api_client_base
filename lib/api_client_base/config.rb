@@ -21,5 +21,10 @@ module ApiClientBase
     def config_path
       Pathname.new File.expand_path('/config')
     end
+
+    # @return [String] full path to configuration file
+    def file_path
+      File.join(config_path, @file_name)
+    end
   end
 end

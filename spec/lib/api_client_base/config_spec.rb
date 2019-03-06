@@ -26,5 +26,10 @@ module ApiClientBase
       specify { expect(subject.config_path).to be_instance_of(Pathname) }
       specify { expect(subject.config_path.realdirpath.to_s).to eq "/config" }
     end
+    context "#file_path" do
+      specify { expect(subject).to respond_to(:file_path).with(0).arguments }
+      specify { expect(subject.file_path).to be_instance_of(String) }
+      specify { expect(subject.file_path).to eq "#{subject.config_path}/#{subject.file_name}" }
+    end
   end
 end
