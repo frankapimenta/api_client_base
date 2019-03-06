@@ -12,5 +12,9 @@ module ApiClientBase
       specify { expect { subject }.not_to raise_error }
       specify { expect(subject.env).to eq :staging }
     end
+    context "defines a config instance for class" do
+      specify { is_expected.to respond_to(:config).with(0).arguments }
+      specify { expect(subject.config).to be_instance_of Config }
+    end
   end
 end

@@ -8,5 +8,9 @@ module ApiClientBase
     def env
       @env
     end
+
+    def config
+      Config.new
+    end
   end
 end
