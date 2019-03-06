@@ -20,6 +20,9 @@ module ApiClientBase
     # @return [Symbol] the env of this gem
     attr_accessor :env
 
+    # @return [String] the api authentication token
+    attr_accessor :api_auth_token
+
     # @return [String] the configuration file name
     attr_reader :file_name
 

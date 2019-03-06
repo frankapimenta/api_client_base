@@ -12,6 +12,20 @@ module ApiClientBase
       subject.env = :production
       expect(subject.env).to eq :production
     end
+    context "#api_auth_token" do
+      subject { described_class.new env: :development }
+      specify { expect(subject).to respond_to(:api_auth_token).with(0).arguments }
+      specify { expect(subject.api_auth_token).to eq 'secret' } #defined in config file
+    end
+    context "#api_auth_token=" do
+      subject { described_class.new env: :development }
+      specify { expect(subject).to respond_to(:api_auth_token=).with(1).arguments }
+      specify "sets token" do
+        expect(subject.api_auth_token).to eq 'secret' # loaded from file
+        subject.api_auth_token = "new token"
+        expect(subject.api_auth_token).to eq "new token"
+      end
+    end
     context "#file_name" do
       specify { expect(subject).to respond_to(:file_name).with(0).arguments }
       specify "has default of api_client_base.yml" do
