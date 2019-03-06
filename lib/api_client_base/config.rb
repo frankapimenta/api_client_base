@@ -1,3 +1,5 @@
+require 'yaml'
+
 module ApiClientBase
   # represents the configurations for this gem
   #
@@ -25,6 +27,17 @@ module ApiClientBase
     # @return [String] full path to configuration file
     def file_path
       File.join(config_path, @file_name)
+    end
+
+    def settings
+      @settings ||= load_configurations || {}
+    end
+
+    private def load_configurations
+      file_extension = File.extname(file_path)
+      file_basename  = File.basename(file_path, file_extension)
+
+      YAML::load_file(file_path)[file_basename][env.to_s]
     end
   end
 end
