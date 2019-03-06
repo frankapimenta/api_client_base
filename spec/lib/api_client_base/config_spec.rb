@@ -18,9 +18,8 @@ module ApiClientBase
         expect(subject.file_name).to eq 'api_client_base.yml'
       end
     end
-    specify "defines configuration file name on initialization" do
-      allow_any_instance_of(described_class).to receive(:load_configurations)
-      expect(described_class.new(file_name: 'config.yml').file_name).to eq 'config.yml'
+    specify "raises error if given file_name on initialization does not exist" do
+      expect { described_class.new(file_name: 'config.yml') }.to raise_error Error, "configuration file /Users/frankpimenta/Development/Gems/api_client_base/config/config.yml does not exist"
     end
     context "#config_path" do
       specify { expect(subject).to respond_to(:config_path).with(0).arguments }

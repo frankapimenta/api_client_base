@@ -9,8 +9,10 @@ module ApiClientBase
     # sets enviroments for this gem
     #   :default is the default env when no env is given/set
     def initialize env: :default, file_name: 'api_client_base.yml'
-      @env = env
       @file_name = file_name
+      raise Error.new "configuration file #{file_path} does not exist" unless File.exists? file_path
+
+      @env = env
 
       define_methods_for_loaded_configurations
     end
