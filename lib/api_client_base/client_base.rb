@@ -4,8 +4,6 @@ module ApiClientBase
   # @author Frank Pimenta <frankapimenta@gmail.com>
   class ClientBase
 
-    attr_reader :config
-
     # sets development as the default enviroment this gem runs in
     def initialize env: :development
       @config = Config.new env: env
@@ -14,6 +12,14 @@ module ApiClientBase
     # @return [Symbol] the enviroment this gem is running in
     def env
       @config.env
+    end
+
+    # @yield [Config] instance if block given
+    # @return [Config] the gem configurations
+    def config
+      yield @config if block_given?
+
+      @config
     end
 
   end

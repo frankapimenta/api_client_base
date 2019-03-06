@@ -15,6 +15,9 @@ module ApiClientBase
     context "defines a config instance for class" do
       specify { is_expected.to respond_to(:config).with(0).arguments }
       specify { expect(subject.config).to be_instance_of Config }
+      specify "yields config if block given" do
+        expect { |b| subject.config(&b) }.to yield_control
+      end
     end
   end
 end
