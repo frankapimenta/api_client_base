@@ -31,6 +31,7 @@ module ApiClientBase
       File.join(config_path, @file_name)
     end
 
+    # @return [Hash] the configurations loaded from #file_path
     def configurations
       @configurations ||= load_configurations || {}
     end
