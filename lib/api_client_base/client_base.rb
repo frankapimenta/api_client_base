@@ -1,16 +1,15 @@
 module ApiClientBase
   class ClientBase
 
+    attr_reader :config
+
     def initialize env: :development
-      @env = env
+      @config = Config.new env: env
     end
 
     def env
-      @env
+      @config.env
     end
 
-    def config
-      Config.new
-    end
   end
 end
