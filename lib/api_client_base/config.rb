@@ -1,7 +1,12 @@
 module ApiClientBase
   class Config
+
+    def initialize env: :default
+      @env = env
+    end
+
     def env
-      :default
+      @env
     end
   end
 end
