@@ -31,11 +31,11 @@ module ApiClientBase
       specify { expect(subject.file_path).to be_instance_of(String) }
       specify { expect(subject.file_path).to eq "#{subject.config_path}/#{subject.file_name}" }
     end
-    context "#settings" do
+    context "#configurations" do
       subject { described_class.new env: :development }
-      specify { expect(subject).to respond_to(:settings).with(0).arguments }
-      specify { expect(subject.settings).to be_instance_of Hash }
-      specify { expect(subject.settings["ssl"]).to be_falsey }
+      specify { expect(subject).to respond_to(:configurations).with(0).arguments }
+      specify { expect(subject.configurations).to be_instance_of Hash }
+      specify { expect(subject.configurations["ssl"]).to be_falsey }
     end
   end
 end

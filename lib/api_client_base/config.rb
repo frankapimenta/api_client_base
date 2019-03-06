@@ -29,8 +29,8 @@ module ApiClientBase
       File.join(config_path, @file_name)
     end
 
-    def settings
-      @settings ||= load_configurations || {}
+    def configurations
+      @configurations ||= load_configurations || {}
     end
 
     private def load_configurations
