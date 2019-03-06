@@ -12,5 +12,14 @@ module ApiClientBase
       subject.env = :production
       expect(subject.env).to eq :production
     end
+    context "#file_name" do
+      specify { expect(subject).to respond_to(:file_name).with(0).arguments }
+      specify "has default of api_client_base.yml" do
+        expect(subject.file_name).to eq 'api_client_base.yml'
+      end
+    end
+    specify "defines configuration file name on initialization" do
+      expect(described_class.new(file_name: 'config.yml').file_name).to eq 'config.yml'
+    end
   end
 end
