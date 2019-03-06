@@ -5,8 +5,9 @@ module ApiClientBase
   class ClientBase
 
     # sets development as the default enviroment this gem runs in
-    def initialize env: :development
-      @config = Config.new env: env
+    def initialize env: :development, config: Config.new
+      @config     = config
+      @config.env = env
     end
 
     # @return [Symbol] the enviroment this gem is running in

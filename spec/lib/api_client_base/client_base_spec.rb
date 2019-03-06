@@ -13,6 +13,10 @@ module ApiClientBase
       specify { expect(subject.env).to eq :staging }
     end
     context "defines a config instance for class" do
+      specify "accepts configuration object via initialization" do
+        config = Config.new env: :development
+        expect(described_class.new(config: config).config).to eq config
+      end
       specify { is_expected.to respond_to(:config).with(0).arguments }
       specify { expect(subject.config).to be_instance_of Config }
       specify "yields config if block given" do
