@@ -11,6 +11,8 @@ module ApiClientBase
     def initialize env: :default, file_name: 'api_client_base.yml'
       @env = env
       @file_name = file_name
+
+      define_methods_for_loaded_configurations
     end
 
     # @return [Symbol] the env of this gem
@@ -30,7 +32,7 @@ module ApiClientBase
     end
 
     def configurations
-      @configurations ||= load_configurations || {}
+      @configurations ||= load_configurations || {}
     end
 
     private def load_configurations
@@ -38,6 +40,16 @@ module ApiClientBase
       file_basename  = File.basename(file_path, file_extension)
 
       YAML::load_file(file_path)[file_basename][env.to_s]
+    end
+
+    private def define_methods_for_loaded_configurations
+      configurations.each_pair do |k,v|
+        instance_eval <<-METHODS
+          def #{k}
+            #{v}
+          end
+        METHODS
+      end
     end
   end
 end

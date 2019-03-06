@@ -19,6 +19,7 @@ module ApiClientBase
       end
     end
     specify "defines configuration file name on initialization" do
+      allow_any_instance_of(described_class).to receive(:load_configurations)
       expect(described_class.new(file_name: 'config.yml').file_name).to eq 'config.yml'
     end
     context "#config_path" do
@@ -36,6 +37,14 @@ module ApiClientBase
       specify { expect(subject).to respond_to(:configurations).with(0).arguments }
       specify { expect(subject.configurations).to be_instance_of Hash }
       specify { expect(subject.configurations["ssl"]).to be_falsey }
+    end
+    context "#ssl" do
+      subject { described_class.new env: :development }
+      specify "loads configurations on init" do
+        expect_any_instance_of(described_class).to receive(:load_configurations)
+        subject
+      end
+      specify { expect(subject.ssl).to be_falsey }
     end
   end
 end
