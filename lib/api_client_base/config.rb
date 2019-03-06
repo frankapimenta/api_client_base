@@ -10,9 +10,8 @@ module ApiClientBase
       @env = env
     end
 
-    # @return [Symbol] the enviroment this gem runs in
-    def env
-      @env
-    end
+    # @return [Symbol] the env of this gem
+    attr_accessor :env
+
   end
 end
