@@ -19,7 +19,7 @@ module ApiClientBase
 
     # @return [Path] the path to the config folder of this gem
     def config_path
-      Pathname.new File.expand_path('/config')
+      Pathname.new File.expand_path('config')
     end
 
     # @return [String] full path to configuration file
