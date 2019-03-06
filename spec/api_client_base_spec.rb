@@ -1,4 +1,5 @@
 require 'api_client_base/client_base'
+require 'api_client_base/config'
 
 RSpec.describe ApiClientBase do
   specify "has class Error defined" do
