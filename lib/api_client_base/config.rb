@@ -46,9 +46,18 @@ module ApiClientBase
     private def define_methods_for_loaded_configurations
       configurations.each_pair do |k,v|
         instance_eval <<-METHODS
+          @#{k} = v # set first value for configuration
+
+          # define reader for #{k}
           def #{k}
-            @#{k} = #{v}
+            @#{k}
           end
+
+          # define writter for #{k}
+          def #{k}=(value)
+            @#{k} = value
+          end
+
         METHODS
       end
     end

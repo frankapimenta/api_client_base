@@ -48,7 +48,15 @@ module ApiClientBase
         subject.ssl
         expect(subject.instance_variables).to include(:@ssl)
       end
-      specify { expect(subject.ssl).to be_falsey }
+      specify{ expect(subject.ssl).to be_falsey }
+    end
+    context("#ssl=") do
+      subject { described_class.new env: :development }
+      specify "changes value" do
+        expect(subject.ssl).to be_falsey
+        subject.ssl = true
+        expect(subject.ssl).to be_truthy
+      end
     end
   end
 end
