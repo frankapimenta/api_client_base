@@ -1,5 +1,7 @@
 module ApiClientBase
   class Config
-    attr_reader :env
+    def env
+      :default
+    end
   end
 end
