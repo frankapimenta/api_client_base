@@ -1,4 +1,4 @@
 api_client_base:
   development:
-    ssl: false
-    api_auth_token: 'secret'
+    ssl: <%= ENV['DEV_API_CLIENT_BASE_SSL'] %>
+    api_auth_token: <%= ENV['DEV_API_CLIENT_BASE_API_AUTH_TOKEN_SECRET'] %>

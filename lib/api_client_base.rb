@@ -1,3 +1,6 @@
+require 'dotenv'
+Dotenv.load
+
 require "api_client_base/version"
 
 # outer most scope for gem
