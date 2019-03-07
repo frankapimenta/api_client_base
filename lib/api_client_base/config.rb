@@ -26,7 +26,6 @@ module ApiClientBase
     # @return [Symbol] the new environment
     def env= env
       @env = env
-
       # will remove methods created from previous loading of configurations
       undef_methods_loaded_from_configurations
       # define new methods from new loaded configurations
