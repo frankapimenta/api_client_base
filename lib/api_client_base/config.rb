@@ -15,11 +15,23 @@ module ApiClientBase
 
       @env = env
 
-      define_methods_for_loaded_configurations
+      def_methods_for_loaded_configurations
     end
 
     # @return [Symbol] the env of this gem
-    attr_accessor :env
+    attr_reader :env
+
+    # sets new environment and load the configurations for it
+    #
+    # @return [Symbol] the new environment
+    def env= env
+      @env = env
+
+      # will remove methods created from previous loading of configurations
+      undef_methods_loaded_from_configurations
+      # define new methods from new loaded configurations
+      def_methods_for_loaded_configurations
+    end
 
     # @return [String] the api authentication token
     attr_accessor :api_auth_token
@@ -39,7 +51,7 @@ module ApiClientBase
 
     # @return [Hash] the configurations loaded from #file_path
     def configurations
-      @configurations ||= load_configurations || {}
+      @configurations = load_configurations || {}
     end
 
     private def load_configurations
@@ -51,7 +63,13 @@ module ApiClientBase
       YAML::load(file_content_parsed)[file_basename][env.to_s]
     end
 
-    private def define_methods_for_loaded_configurations
+    private def undef_methods_loaded_from_configurations
+      configurations.each_pair do |k,_|
+        instance_eval { undef :"#{k}" if respond_to?(:"#{k}") }
+      end
+    end
+
+    private def def_methods_for_loaded_configurations
       configurations.each_pair do |k,v|
         instance_eval <<-METHODS
           @#{k} = v # set first value for configuration

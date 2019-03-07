@@ -2,3 +2,6 @@ api_client_base:
   development:
     ssl: <%= ENV['DEV_API_CLIENT_BASE_SSL'] %>
     api_auth_token: <%= ENV['DEV_API_CLIENT_BASE_API_AUTH_TOKEN_SECRET'] %>
+  test:
+    ssl: true
+    api_auth_token: 'test-secret'

@@ -12,6 +12,16 @@ module ApiClientBase
       subject.env = :production
       expect(subject.env).to eq :production
     end
+    specify "should load configurations on setting new env" do
+      expect(subject.env).to eq :default
+      expect(subject).to receive(:def_methods_for_loaded_configurations).and_call_original
+
+      subject.env = :test
+
+      expect(subject.env).to eq :test
+      expect(subject.ssl).to be_truthy
+      expect(subject.api_auth_token).to eq 'test-secret'
+    end
     context "#api_auth_token" do
       subject { described_class.new env: :development }
       specify { expect(subject).to respond_to(:api_auth_token).with(0).arguments }
